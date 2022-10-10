@@ -91,10 +91,11 @@ def zapis():
     while i < a:
         itog = str(fak1[i])
         i = i + 1
-        with open("out.csv", "a", encoding='utf8') as f:
-            writer = csv.writer(f, delimiter = ",",
-                                 lineterminator="\r",)
-            writer.writerows({itog})
+        with open("out.csv", "a", newline="") as f:
+            writer = csv.writer(f)
+            writer.writerows(
+                [itog]
+            )
 
 #parspegas()
 #parsuroki()
