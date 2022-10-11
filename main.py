@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 import requests
 from bs4 import BeautifulSoup
 import csv
@@ -119,5 +117,5 @@ def zapis():
 parspegas()
 parsuroki()
 zapis()
->>>>>>> c488201 (add main.py)
+
 
