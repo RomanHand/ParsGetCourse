@@ -94,7 +94,7 @@ def zapis():
         with open("out.csv", "a", newline="") as f:
             writer = csv.writer(f)
             writer.writerows(
-                [itog]
+                itog
             )
 
 #parspegas()
