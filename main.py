@@ -4,11 +4,12 @@ import requests
 from bs4 import BeautifulSoup
 import csv
 
-link = "https://school-operator.getcourse.ru/cms/system/login?"
-url = "https://school-operator.getcourse.ru/teach/control"
+link = 'https://school-operator.getcourse.ru/cms/system/login?'
+url = 'https://school-operator.getcourse.ru/teach/control'
 headers = {
     "Accept": "*/*",
-    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36"
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 "
+                  "Safari/537.36 "
 }
 
 data = {
@@ -77,29 +78,46 @@ def parsuroki():
         page = get_html("https://school-operator.getcourse.ru" + faks[i])
         soup = BeautifulSoup(page, 'html.parser')
         items1 = soup.find('h2', class_='lesson-title-value')
-        # items2 = soup.find('h1').get('href')
-        # items3 = soup.find('iframe').get('src')
+        items2 = soup.find('h1')
+        items3 = soup.find('iframe').get('src')
         print(items1.get_text())
+        print(items2.get_text())
+        print(items3)
+
         fak1.append(str(items1.get_text()))
+        fak2.append(str(items2.get_text()))
+        fak3.append(str(items3))
         i = i + 1
 
 
 
 def zapis():
-    a = len(fak1)
+    with open("out.csv", "w", newline="") as f:
+        writer = csv.writer(f, )
+        writer.writerows(
+            [['Факультет', 'Название', 'Ссылка на ютуб']]
+        )
+
+    a = len(fak3)
+    print(a)
     i = 0
     while i < a:
-        itog = str(fak1[i])
+        itog1 = str(fak2[i])
+        itog2 = str(fak1[i])
+        itog3 = str(fak3[i])
+        #print(type(itog))
         i = i + 1
         with open("out.csv", "a", newline="") as f:
-            writer = csv.writer(f)
+            writer = csv.writer(f,)
             writer.writerows(
-                itog
+               [[itog1, itog2, itog3]]
             )
 
-#parspegas()
-#parsuroki()
-fak1 = ['абаоба', 'абоба2']
+#fak1 = ["опиар", "пвыпвы"]
+#fak2 = ["ыапрыаы", "мыаымы"]
+#fak3 = ["ыаамв", "ываыав"]
+parspegas()
+parsuroki()
 zapis()
 >>>>>>> c488201 (add main.py)
 
